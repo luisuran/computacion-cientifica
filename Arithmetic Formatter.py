@@ -21,12 +21,38 @@ def valido(lista):
 
     return True
 
-def arithmetic_arranger(lista, resultado=False):
+def formatoNumero(longitud, cadena):
+    espacios = longitud - len(cadena)
+    if cadena.isnumeric():
+        cadena = ' '*espacios + cadena
+    else:
+        espacios = longitud - len(cadena)
+        cadena = cadena[0] + ' '*espacios + cadena[1:]
+    return cadena
+
+def arithmetic_arranger(lista, mostrarResultado=False):
     if valido(lista) is not True:
         return valido(lista)
     else:
-        return 'OK'
+        numerador = ""
+        denominador = ""
+        barra = ""
+        resultados = ""
+
+        for x in lista:
+            longitud = max(len(x.split()[0]), len(x.split()[2])) + 2
+            resultado = str(eval(x))
+            
+            numerador = formatoNumero(longitud, x.split()[0])
+            denominador = formatoNumero(longitud, x.split()[1] + x.split()[2])
+            barra = '-' * longitud
+            resultados = formatoNumero(longitud, resultado)
+
+            print(numerador + '\n' + denominador + '\n' + barra + '\n' + resultados)
+
+            break
+        
     
 
 
-print(arithmetic_arranger(["5 - 8", "9 - 3801", "9999 + 9999", "523 - 49"], True))
+arithmetic_arranger(["35 - 8", "9 - 3801", "9999 + 9999", "523 - 49"], True)
