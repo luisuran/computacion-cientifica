@@ -21,12 +21,12 @@ def valido(lista):
 
     return True
 
-def formatoNumero(longitud, cadena, esResultado=False):
+def formatoNumero(longitud, cadena, esDen=False):
     espacios = longitud - len(cadena)
-    if cadena.isnumeric() or esResultado:
-        cadena = ' '*espacios + cadena
-    else:
+    if esDen:
         cadena = cadena[0] + ' '*espacios + cadena[1:]
+    else:
+        cadena = ' '*espacios + cadena
     return cadena
 
 def arithmetic_arranger(lista, mostrarResultado=False):
@@ -46,9 +46,9 @@ def arithmetic_arranger(lista, mostrarResultado=False):
             resultado = str(eval(x))
             
             numerador += formatoNumero(longitud, num1) + "    "
-            denominador += formatoNumero(longitud, signo + num2) + "    "
+            denominador += formatoNumero(longitud, signo + num2, True) + "    "
             barra += '-' * longitud + "    "
-            resultados += formatoNumero(longitud, resultado, True) + "    "
+            resultados += formatoNumero(longitud, resultado) + "    "
 
         if mostrarResultado:
             return (numerador.rstrip() + '\n' + denominador.rstrip() + '\n' + barra.rstrip() + '\n' + resultados.rstrip())
@@ -61,4 +61,3 @@ print(arithmetic_arranger(["32 + 698", "3801 - 2", "45 + 43", "123 + 49"]))
 print(arithmetic_arranger(["32 + 8", "1 - 3801", "9999 + 9999", "523 - 49"], True))
 print(arithmetic_arranger(["98 + 3g5", "3801 - 2", "45 + 43", "123 + 49"]))
 print(arithmetic_arranger(["32 - 698", "1 - 3801", "45 + 43", "123 + 49"], True))
-
