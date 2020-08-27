@@ -1,5 +1,3 @@
-import re
-
 def valido(lista):
     if len(lista) > 5: 
         return "Error: Too many problems."
@@ -16,17 +14,18 @@ def valido(lista):
             return"Error: Numbers cannot be more than four digits."
             
 
-        if (re.search("^\d+", num1) is None) or (re.search("^\d+", num2) is None):
+        if num1.isdigit() and num2.isdigit():
+            pass
+        else:
             return "Error: Numbers must only contain digits."
 
     return True
 
-def formatoNumero(longitud, cadena):
+def formatoNumero(longitud, cadena, esResultado=False):
     espacios = longitud - len(cadena)
-    if cadena.isnumeric():
+    if cadena.isnumeric() or esResultado:
         cadena = ' '*espacios + cadena
     else:
-        espacios = longitud - len(cadena)
         cadena = cadena[0] + ' '*espacios + cadena[1:]
     return cadena
 
@@ -40,19 +39,26 @@ def arithmetic_arranger(lista, mostrarResultado=False):
         resultados = ""
 
         for x in lista:
-            longitud = max(len(x.split()[0]), len(x.split()[2])) + 2
+            num1 = x.split()[0]
+            num2 = x.split()[2]
+            signo = x.split()[1]
+            longitud = max(len(num1), len(num2)) + 2
             resultado = str(eval(x))
             
-            numerador = formatoNumero(longitud, x.split()[0])
-            denominador = formatoNumero(longitud, x.split()[1] + x.split()[2])
-            barra = '-' * longitud
-            resultados = formatoNumero(longitud, resultado)
+            numerador += formatoNumero(longitud, num1) + "    "
+            denominador += formatoNumero(longitud, signo + num2) + "    "
+            barra += '-' * longitud + "    "
+            resultados += formatoNumero(longitud, resultado, True) + "    "
 
-            print(numerador + '\n' + denominador + '\n' + barra + '\n' + resultados)
-
-            break
-        
+        if mostrarResultado:
+            return (numerador.rstrip() + '\n' + denominador.rstrip() + '\n' + barra.rstrip() + '\n' + resultados.rstrip())
+        else:
+            return (numerador.rstrip() + '\n' + denominador.rstrip() + '\n' + barra.rstrip())
     
 
 
-arithmetic_arranger(["35 - 8", "9 - 3801", "9999 + 9999", "523 - 49"], True)
+print(arithmetic_arranger(["32 + 698", "3801 - 2", "45 + 43", "123 + 49"]))
+print(arithmetic_arranger(["32 + 8", "1 - 3801", "9999 + 9999", "523 - 49"], True))
+print(arithmetic_arranger(["98 + 3g5", "3801 - 2", "45 + 43", "123 + 49"]))
+print(arithmetic_arranger(["32 - 698", "1 - 3801", "45 + 43", "123 + 49"], True))
+
