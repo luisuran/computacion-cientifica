@@ -11,25 +11,30 @@ def add_time(inicio, duracion, dia=None):
     dias = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     canti_dias = 0
 
-    while minutos_fin >=60:
+    # Calculo la cantidad de horas y minutos finales
+    while minutos_fin >= 60:
         minutos_fin -= 60
         hora_fin += 1
 
+    # Calculo el período final
     while hora_fin >= 12:
         hora_fin -= 12
         if periodo == 'AM':
             periodo = 'PM'
         else:
             periodo = 'AM'
-            canti_dias += 1
+            canti_dias += 1     # Cuento la cantidad de días
 
     if hora_fin == 0: hora_fin = 12
 
     respuesta = "{}:{:02d} {}".format(hora_fin, minutos_fin, periodo)
 
     if dia is not None:
+        # Calculo la posición en el arreglo de días
         pos_inicial = dias.index(dia.capitalize())
         pos = pos_inicial + canti_dias
+
+        # Si la posición es mayor al tamaño del arreglo voy restando hasta hacerlo entrar
         while pos > 6:
             pos -= 7
         respuesta += ", {}".format(dias[pos])
