@@ -1,10 +1,10 @@
 ## Proyectos de computación científica con python
 
 
-### 1 - Arithmetic formatter
+### 1 - Arithmetic Formatter
 Crear una función que reciba una lista de problemas aritméticos y devuelva los problemas ordenados verticalmente y uno al lado del otro. La función debería tener opcionalmente un segundo argumento. Cuando el segundo argumento se establece en Verdadero, se deben mostrar las respuestas.
 
-### 2 - Time calculator
+### 2 - Time Calculator
 Se pide escribir una función llamada add_time que tome dos parámetros obligatorios y un parámetro opcional:
 <ul>
   <li>Una hora de inicio en formato de reloj de 12 horas (que termina en AM o PM)</li>
@@ -15,3 +15,21 @@ La función debe agregar el tiempo de duración a la hora de inicio y devolver e
 Si el resultado será el día siguiente, debería mostrarse (día siguiente) después de la hora. Si el resultado será más de un día después, debería mostrarse (n días después) después de la hora, donde "n" es el número de días después.<br>
 Si a la función se le da el parámetro opcional de día de inicio de la semana, la salida debe mostrar el día de la semana del resultado. El día de la semana en la salida debe aparecer después de la hora y antes del número de días después.<br>
 No importe ninguna librería de Python. Suponga que las horas de inicio son horas válidas. Los minutos del tiempo de duración serán un número entero menor que 60, pero la hora puede ser cualquier número entero.
+
+### 3 - Budget App
+Implementar la clase Category. Debería poder crear instancias de objetos en función de diferentes categorías de presupuesto, como comida, ropa y entretenimiento. Cuando se crean objetos, se pasan con el nombre de la categoría. La clase debe tener una variable de instancia llamada ledger que sea una lista. La clase también debe contener los siguientes métodos:
+<ul>
+  <li>Un método deposit que acepta una cantidad y una descripción. Si no se proporciona una descripción, debería ser una cadena vacía por defecto. El método debe agregar un objeto a la lista ledger en forma de {"amount": monto, "description": descripción}.</li>
+  <li>Un método withdraw que es similar al método deposit, pero la cantidad transferida debe almacenarse en ledger como un número negativo. Si no hay fondos suficientes, no se debe agregar nada a ledger. Este método debe devolver True si se realizó el retiro y False en caso contrario.</li>
+  <li>Un método get_balance que devuelve el saldo actual de la categoría de presupuesto en función de los depósitos y retiros que se han producido.</li>
+  <li>Un método transferencia que acepta una cantidad y otra categoría presupuestaria como argumentos. El método debe agregar un retiro con el monto y la descripción "Transfer to [Categoría de presupuesto de destino]". Luego, el método debe agregar un depósito a la otra categoría de presupuesto con el monto y la descripción "Transfer from [Categoría de presupuesto de origen]". Si no hay fondos suficientes, no se debe agregar nada a ninguno de los ledgers. Este método debería devolver True si se realizó la transferencia y False en caso contrario.</li>
+  <li>Un método check_funds que acepta una cantidad como argumento. Devuelve False si la cantidad es menor que el saldo de la categoría de presupuesto y devuelve True en caso contrario. Este método debe utilizarse tanto por el método withdraw como por el método transfer.</ul>
+</ul>
+Cuando el objeto budget se imprime debe mostar:
+<ul>
+  <li>Una línea de título de 30 caracteres donde el nombre de la categoría se centra en una línea de *.</li>
+  <li>Una lista de los elementos del ledger. Cada línea debe mostrar la descripción y el monto. Deben mostrarse los primeros 23 caracteres de la descripción, luego la cantidad. La cantidad debe estar alineada a la derecha, contener dos lugares decimales y mostrar un máximo de 7 caracteres.</li>
+  <li>Una línea que muestra el total de la categoría.</li>
+</ul>
+Además de la clase Category, crear una función (fuera de la clase) llamada create_spend_chart que tome una lista de categorías como argumento. Debería devolver una cadena que sea un gráfico de barras.<br>
+El gráfico debe mostrar el porcentaje gastado en cada categoría pasada como parámetro a la función. El porcentaje gastado debe calcularse solo con retiros y no con depósitos. Abajo, en el lado izquierdo del gráfico, deben aparecer las etiquetas 0 - 100. Las "barras" en el gráfico de barras deben estar formadas por el carácter "o". La altura de cada barra debe redondearse hacia abajo al 10 más cercano. La línea horizontal debajo de las barras debe ir dos espacios más allá de la barra final. Cada nombre de categoría debe estar literalmente debajo de la barra. Debe haber un título en la parte superior que diga "Porcentaje gastado por categoría".
