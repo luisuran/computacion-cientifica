@@ -28,9 +28,10 @@ def add_time(inicio, duracion, dia=None):
     respuesta = "{}:{:02d} {}".format(hora_fin, minutos_fin, periodo)
 
     if dia is not None:
-        pos = dias.index(dia.capitalize()) + canti_dias
-        if pos > 6:
-            pos = pos % 6
+        pos_inicial = dias.index(dia.capitalize())
+        pos = pos_inicial + canti_dias
+        while pos > 6:
+            pos -= 7
         respuesta += ", {}".format(dias[pos])
 
     if canti_dias == 1:
@@ -40,6 +41,7 @@ def add_time(inicio, duracion, dia=None):
         respuesta += " ({} days later)".format(canti_dias)
     
     print(respuesta)
+
 
 add_time("3:00 PM", "3:10")
 # Returns: 6:10 PM
