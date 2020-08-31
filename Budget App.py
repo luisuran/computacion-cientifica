@@ -41,5 +41,21 @@ class Category:
 
         return resp
 
-def create_spend_chart():
-    pass
+def create_spend_chart(categorias):
+    gastos = []
+    gastos_porcentajes = []
+
+    for categoria in categorias:
+        gasto_por_categoria = 0
+        for transaccion in categoria.ledger:
+            if transaccion['amount'] < 0:
+                gasto_por_categoria -= transaccion['amount']
+        gastos.append(gasto_por_categoria)
+
+    for gasto in gastos:
+        porc = int(gasto / sum(gastos) * 100)   # Calculo el porcentaje de gastos por categoría
+        while porc % 10 != 0: porc -= 1         # Redondeo a la decena más baja
+        gastos_porcentajes.append(porc)
+
+    print(gastos)
+    print(gastos_porcentajes)
