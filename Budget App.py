@@ -44,6 +44,8 @@ class Category:
 def create_spend_chart(categorias):
     gastos = []
     gastos_porcentajes = []
+    categorias_nombres = [c.nombre for c in categorias]
+    longi = len(max(categorias_nombres, key=len))       # Longitud del nombre de la categoría más largo
 
     for categoria in categorias:
         gasto_por_categoria = 0
@@ -57,5 +59,32 @@ def create_spend_chart(categorias):
         while porc % 10 != 0: porc -= 1         # Redondeo a la decena más baja
         gastos_porcentajes.append(porc)
 
-    print(gastos)
-    print(gastos_porcentajes)
+
+    resp = "Percentage spent by category\n"
+
+    for x in range(100, -10, -10):
+        col = "{}|".format(x)
+        resp += col.rjust(4) + " "
+        
+        for p in gastos_porcentajes:
+            if p >= x:
+                resp += "o  "
+            else:
+                resp += "   "
+        
+        resp += "\n"
+
+    resp += "    " + "-" * (1 + (3 * len(gastos))) + "\n"  # Eje horizontal
+
+    # Muestro los nombres
+    for x in range(longi):
+        linea = "     "
+        for y in range(len(categorias)):
+            try:
+                linea += categorias_nombres[y][x] + "  "
+            except:
+                linea += "   "
+
+        resp += linea + "\n"
+
+    return resp[:-1]    # Quito el último '\n'
