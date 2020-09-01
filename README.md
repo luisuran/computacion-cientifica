@@ -33,3 +33,22 @@ Cuando el objeto budget se imprime debe mostar:
 </ul>
 Además de la clase Category, crear una función (fuera de la clase) llamada create_spend_chart que tome una lista de categorías como argumento. Debería devolver una cadena que sea un gráfico de barras.<br>
 El gráfico debe mostrar el porcentaje gastado en cada categoría pasada como parámetro a la función. El porcentaje gastado debe calcularse solo con retiros y no con depósitos. Abajo, en el lado izquierdo del gráfico, deben aparecer las etiquetas 0 - 100. Las "barras" en el gráfico de barras deben estar formadas por el carácter "o". La altura de cada barra debe redondearse hacia abajo al 10 más cercano. La línea horizontal debajo de las barras debe ir dos espacios más allá de la barra final. Cada nombre de categoría debe estar literalmente debajo de la barra. Debe haber un título en la parte superior que diga "Porcentaje gastado por categoría".
+
+### 4 - Polygon Area Calculator
+Crear una clase Rectangle y una clase Square. La clase Square debe ser una subclase de Rectangle y heredar métodos y atributos.
+#### Clase Rectangle
+Cuando se crea un objeto Rectangle, debe inicializarse con los atributos width (ancho) y (height) alto. La clase también debe contener los siguientes métodos:
+<ul>
+  <li>set_width</li>
+  <li>set_height</li>
+  <li>get_area: Devuelve el área del rectángulo</li>
+  <li>get_perimeter: Devuelve el perímetro del rectángulo</li>
+  <li>get_diagonal: Devuelve el largo de la diagonal</li>
+  <li>get_picture: Devuelve una cadena que representa la forma usando líneas de "*". El número de líneas debe ser igual a la altura y el número de "*" en cada línea debe ser igual al ancho. Debe haber una nueva línea (\ n) al final de cada línea. Si el ancho o alto es mayor que 50, esto debería devolver la cadena: "Too big for picture".</li>
+  <li>get_amount_inside: Toma otra forma (cuadrado o rectángulo) como argumento. Devuelve el número de veces que la forma pasada podría caber dentro de la forma (sin rotaciones).</li>
+</ul>
+Además, si una instancia de un rectángulo se representa como una cadena, debería verse así: Rectangle (width = 5, height = 10)
+#### Square Rectangle
+La clase Square debería ser una subclase de Rectangle. Cuando se crea un objeto Square, se pasa la longitud de un lado. El método __init__ debe almacenar la longitud del lado en los atributos de ancho y alto de la clase Rectangle.
+La clase Square debería poder acceder a los métodos de la clase Rectangle pero también debería contener un método set_side. Si una instancia de un cuadrado se representa como una cadena, debería verse así: Square(side=9).
+Además, los métodos set_width y set_height en la clase Square deben establecer tanto el ancho como el alto.
