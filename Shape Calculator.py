@@ -22,6 +22,9 @@ class Rectangle:
         return ((self.width ** 2 + self.height ** 2) ** .5)
 
     def get_picture(self):
+        if self.width > 50 or self.height > 50:
+            return "Too big for picture."
+
         imagen = ""
 
         for x in range(self.height):
@@ -30,25 +33,28 @@ class Rectangle:
         return imagen
 
     def get_amount_inside(self, forma):
-        if type(r1).__name__ == 'Rectangle':
-            lado = min(forma.height, forma.width)
-        else:
-            lado = forma.lado
+        cant_ancho = int(self.width / forma.width)
+        cant_alto = int(self.height / forma.height)
+
+        return cant_alto * cant_ancho
 
     def __str__(self):
         return "Rectangle(width={}, height={})".format(self.width, self.height)
 
 class Square(Rectangle):
-    lado = 0
-
     def __init__(self, lado):
-        self.lado = lado
+        self.width = lado
+        self.height = lado
 
-    def set_width(self, n):
-        self.width = n
+    def set_width(self, lado):
+        self.set_side(lado)
 
-    def set_height(self, n):
-        self.height = n
+    def set_height(self, lado):
+        self.set_side(lado)
+
+    def set_side(self, lado):
+        self.width = lado
+        self.height = lado
 
     def __str__(self):
-        return "Square(side={})".format(self.lado)
+        return "Square(side={})".format(self.width)
