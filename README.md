@@ -57,7 +57,9 @@ Además, los métodos set_width y set_height en la clase Square deben establecer
 Escribir un programa para determinar la probabilidad aproximada de sacar ciertas bolas al azar de un sombrero.
 Primero, cree una clase Hat. La clase debe tomar un número variable de argumentos que especifiquen el número de bolas de cada color que hay en el sombrero.
 Siempre se creará un sombrero con al menos una bola. Los argumentos que se pasan al objeto hat al crearse deben convertirse en una variable de instancia contents. Contents debe ser una lista de cadenas que contengan un elemento por cada bola del sombrero. Cada elemento de la lista debe tener un nombre de color que represente una sola bola de ese color. Por ejemplo, si su sombrero es {"rojo": 2, "azul": 1}, el contenido debe ser ["rojo", "rojo", "azul"].
+
 La clase Sombrero debe tener un método draw que acepte un argumento que indique el número de bolas que se sacarán del sombrero. Este método debería eliminar bolas al azar del contenido y devolver esas bolas como una lista de cadenas. Las bolas no deben volver al sombrero durante el sorteo, similar a un experimento de urna sin reposición. Si el número de bolas a sacar supera la cantidad disponible, devuelva todas las bolas.
+
 A continuación, cree la función experiment (fuera de la clase Hat). Esta función debe aceptar los siguientes argumentos:
 <ul>
   <li>hat: Un objeto hat que contiene bolas que se deben copiar dentro de la función.</li>
@@ -66,5 +68,7 @@ A continuación, cree la función experiment (fuera de la clase Hat). Esta funci
   <li>num_experiments: El número de experimentos a realizar. (Cuantos más experimentos se realicen, más precisa será la probabilidad aproximada).</li>
 </ul>
 La función del experimento debería devolver una probabilidad.
+
 Por ejemplo, digamos que desea determinar la probabilidad de obtener al menos 2 bolas rojas y 1 bola verde cuando saca 5 bolas de un sombrero que contiene 6 negras, 4 rojas y 3 verdes. Para hacer esto, realizamos N experimentos, contamos cuántas veces M obtenemos al menos 2 bolas rojas y 1 bola verde, y estimamos la probabilidad como M / N. Cada experimento consiste en comenzar con un sombrero que contiene las bolas especificadas, sacar varias bolas y verificar si obtuvimos las bolas que estábamos intentando sacar.
+
 Dado que esto se basa en sorteos aleatorios, la probabilidad será ligeramente diferente cada vez que se ejecute el código.
