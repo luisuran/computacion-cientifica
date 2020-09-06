@@ -2,43 +2,46 @@ import copy
 import random
 
 class Hat:
-    contents = []
-
     def __init__(self, **kwargs):
+        contents = []
         for k, v in kwargs.items():
-            for _ in range(v):
-                self.contents.append(k)
+            for n in range(v):
+                contents.append(k)
+        self.contents = contents
 
     def draw(self, num):
         bolas_sacadas = []
 
         for _ in range(num):
-            num_bola = random.randint(0, len(self.contents) - 1)
-            bolas_sacadas.append(self.contents.pop(num_bola))
+            try:
+                num_bola = random.randint(0, len(self.contents) - 1)
+                bolas_sacadas.append(self.contents.pop(num_bola))
+            except:
+                break
 
         return bolas_sacadas
 
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
-    hat_copia = copy.deepcopy(hat)
+    hat_copia = Hat()
     M = 0
-    expected = []
-    
+
+    esperadas = []                      # Guardo las bolas que espero sacar en forma de arreglo unidimensional
     for k, v in expected_balls.items():
         for _ in range(v):
-            expected.append(k)
-
-    for _ in range(num_experiments):
-        hat_copia.contents = copy.deepcopy(hat.contents)
-        
-        sorteadas = hat_copia.draw(num_balls_drawn)
-
-        # Si encuentro una bola esperada en la lista de bolas sorteadas, la elimino de la lista de sorteadas
-        for x in expected:
-            if x in sorteadas:
-                sorteadas.remove(x)
-
-        # Si la cantidad de bolas en la lista sorteada coincide con la cantidad sacada menos la esperada, quiere 
-        # decir que obtuve todas las bolas
-        if len(sorteadas) == num_balls_drawn - len(expected): M += 1
+            esperadas.append(k)
     
+    for _ in range(num_experiments):
+        hat_copia.contents = copy.copy(hat.contents)
+        sacadas = hat_copia.draw(num_balls_drawn)       # Arreglo con bolas sacadas en éste experimento
+        
+        for x in esperadas:
+            if x in sacadas: sacadas.remove(x)
+
+        if len(sacadas) == min(len(hat.contents), num_balls_drawn) - len(esperadas): M += 1
+
     return M / num_experiments
+
+
+hat = Hat(blue=4, red=2, green=6)
+probability = experiment(hat=hat, expected_balls={"blue": 2, "red": 1}, num_balls_drawn=4, num_experiments=3000)
+print("Probabilidad:", probability)
